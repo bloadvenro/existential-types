@@ -3,7 +3,7 @@ import { Switch } from '../meta/Switch';
 type DropLast1<T extends any[]> = Switch<
   T['length'],
   {
-    default: never[];
+    default: T;
     0: [];
     1: [];
     2: [T[0]];
