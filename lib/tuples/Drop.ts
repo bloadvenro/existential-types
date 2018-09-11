@@ -1,24 +1,6 @@
 import { Switch } from '../meta/Switch';
 
-type Drop1<T extends any[]> = Switch<
-  T['length'],
-  {
-    default: T;
-    0: [];
-    1: [];
-    2: [T[1]];
-    3: [T[1], T[2]];
-    4: [T[1], T[2], T[3]];
-    5: [T[1], T[2], T[3], T[4]];
-    6: [T[1], T[2], T[3], T[4], T[5]];
-    7: [T[1], T[2], T[3], T[4], T[5], T[6]];
-    8: [T[1], T[2], T[3], T[4], T[5], T[6], T[7]];
-    9: [T[1], T[2], T[3], T[4], T[5], T[6], T[7], T[8]];
-    10: [T[1], T[2], T[3], T[4], T[5], T[6], T[7], T[8], T[9]];
-    /* 10 items tuple MAX */
-  }
->;
-
+type Drop1<T extends any[]> = ((...params: T) => any) extends ((first: infer F, ...rest: infer R) => any) ? R : never;
 type Drop2<T extends any[]> = Drop1<Drop1<T>>;
 type Drop3<T extends any[]> = Drop1<Drop2<T>>;
 type Drop4<T extends any[]> = Drop1<Drop3<T>>;
